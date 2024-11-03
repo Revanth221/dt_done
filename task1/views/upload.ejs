@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Event</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea, select, button {
+      padding: 8px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create Event</h1>
+  <form action="/api/v3/app/events" method="POST" enctype="multipart/form-data">
+    <!-- Name Field -->
+    <div>
+      <label for="name">Event Name</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+
+    <!-- File Upload Field -->
+    <div>
+      <label for="image">Upload Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
+    </div>
+
+    <!-- Tagline Field -->
+    <div>
+      <label for="tagline">Tagline</label>
+      <input type="text" id="tagline" name="tagline" required />
+    </div>
+
+    <!-- Schedule Field (Date and Time) -->
+    <div>
+      <label for="schedule">Schedule</label>
+      <input type="datetime-local" id="schedule" name="schedule" required />
+    </div>
+
+    <!-- Description Field -->
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+    </div>
+
+    <!-- Moderator Field -->
+    <div>
+      <label for="moderator">Moderator</label>
+      <input type="text" id="moderator" name="moderator" required />
+    </div>
+
+    <!-- Category Field (Dropdown) -->
+    <div>
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="technology">Technology</option>
+        <option value="education">Education</option>
+        <option value="health">Health</option>
+        <option value="business">Business</option>
+        <!-- Add more categories as needed -->
+      </select>
+    </div>
+
+    <!-- Sub-category Field -->
+    <div>
+      <label for="sub_category">Sub-category</label>
+      <input type="text" id="sub_category" name="sub_category" required />
+    </div>
+
+    <!-- Rigor Rank Field (Number) -->
+    <div>
+      <label for="rigor_rank">Rigor Rank</label>
+      <input type="number" id="rigor_rank" name="rigor_rank" min="1" max="10" required />
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Create Event</button>
+  </form>
+</body>
+</html>
