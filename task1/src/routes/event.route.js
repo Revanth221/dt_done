@@ -16,8 +16,5 @@ router
 
 router.put("/events/:id", upload.single("image"), handleUpdateEvent);
 router.delete("/events/:id", handleDeleteEvent);
-router.get("/upload", (req, res) => {
-  res.render("upload");
-});
 
 export default router;
