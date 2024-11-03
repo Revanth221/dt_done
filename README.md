@@ -1,6 +1,6 @@
 # DT_Backend
 
-This repo contains multiple tasks as part of DT assessment.
+This repo contains multiple tasks as part of DT backend assessment.
 
 ## Tasks
 
