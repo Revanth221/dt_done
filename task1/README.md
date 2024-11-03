@@ -34,6 +34,7 @@ src/
 - Node.js
 - npm (Node Package Manager)
 - MongoDB
+- Cloudinary
 
 ### Installation
 
@@ -71,10 +72,10 @@ The server will run on `http://localhost:3000`.
 
 ## API Testing with Postman
 
-<![get-request](./assets/get.png)
-<![post-request](./assets/post.png)
-<![put-request](./assets/put.png)
-<![delete-request](./assets/delete.png)
+GET![get-request](./assets/get.png)
+POST![post-request](./assets/post.png)
+PUT![put-request](./assets/put.png)
+DELETE![delete-request](./assets/delete.png)
 
 ## API Endpoints
 
@@ -84,6 +85,17 @@ The server will run on `http://localhost:3000`.
 - **POST /api/v3/app/events**: Create a new event (with image upload).
 - **PUT /api/v3/app/events/:id**: Update an existing event by ID (with image upload).
 - **DELETE /api/v3/app/events/:id**: Delete an event by ID.
+
+### Image Handling in POST Request
+
+When a user submits an image in a POST request to the `/api/v3/app/events` endpoint:
+
+1. The image is first stored locally.
+2. Then stored image is uploaded to Cloudinary.
+3. Then URL of the uploaded image is obtained from Cloudinary.
+4. Then `image` field is set to obtained URL not the path of image.
+5. And then event is stored in database.
+6. This ensures that the uploaded image is accessible from anywhere when requested.
 
 ## Key Files
 
@@ -114,3 +126,5 @@ Contains the logic for handling event-related operations such as fetching, creat
 - **ApiResponse.js**: Defines custom API success responses.
 - **asyncHandler.js**: Handles asynchronous operations and errors.
 - **cloudinary.js**: Handles image uploads to Cloudinary.
+
+---
