@@ -1,8 +1,6 @@
-# Task1 Project Documentation
+# Task1 Documentation
 
-## Overview
-
-Task1 is a backend application built with Node.js. It is designed to manage event-related operations such as creating, updating, deleting, and fetching events. The project includes database connectivity, routing, middleware, and controller logic.
+This is a backend application built with Node.js. It is designed to manage event-related operations such as creating, updating, deleting, and fetching events. The project includes database connectivity, routing, middleware, and controller logic.
 
 ## Folder Structure
 
@@ -41,8 +39,8 @@ src/
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/Revanth221/dt_backend.git
-   cd dt_backend/task1
+   git clone https://github.com/Revanth686/DT_Backend.git
+   cd DT_Backend/task1
    ```
 
 2. Install the dependencies:
@@ -70,6 +68,31 @@ npm start
 
 The server will run on `http://localhost:3000`.
 
+## Unique Practices and Features
+
+### Cloudinary Integration
+
+When a user submits an image in a POST request to the `/api/v3/app/events` endpoint:
+
+1. The image is first stored locally.
+2. Then stored image is uploaded to Cloudinary.
+3. Then URL of the uploaded image is obtained from Cloudinary.
+4. Then `image` field is set to obtained URL not the path of image.
+5. And then event is stored in database.
+6. This ensures that the uploaded image is accessible from anywhere when requested.
+
+### Clean Logging with Debug Library
+
+Used `debug` library for clean logging. Logs will only appear in the development environment and not in production, ensuring that production logs remain clean.
+
+### API Error and Response Wrappers
+
+Used custom `ApiError` and `ApiResponse` classes to provide a structured response. This ensures consistent API response format.
+
+### Async Handler
+
+Used `asyncHandler` utility to handle asynchronous operations and catch errors without the need to use try-catch blocks repeatedly in the code following DRY principle resulting in cleaner code.
+
 ## API Testing with Postman
 
 GET![get-request](./assets/get.png)
@@ -86,30 +109,19 @@ DELETE![delete-request](./assets/delete.png)
 - **PUT /api/v3/app/events/:id**: Update an existing event by ID (with image upload).
 - **DELETE /api/v3/app/events/:id**: Delete an event by ID.
 
-### Image Handling in POST Request
-
-When a user submits an image in a POST request to the `/api/v3/app/events` endpoint:
-
-1. The image is first stored locally.
-2. Then stored image is uploaded to Cloudinary.
-3. Then URL of the uploaded image is obtained from Cloudinary.
-4. Then `image` field is set to obtained URL not the path of image.
-5. And then event is stored in database.
-6. This ensures that the uploaded image is accessible from anywhere when requested.
-
 ## Key Files
 
 ### app.js
 
-The main entry point of the application. It sets up the Express server, connects to the database, initializes services, and defines routes and middleware.
+The main entry point of the appl, sets up Express server, connects to database, initializes services, and defines routes and middleware.
 
 ### event.route.js
 
-Defines the routes related to event operations and uses the respective controller functions to handle requests.
+Defines routes related to event operations and uses the respective controller functions, middlewares to handle requests.
 
 ### event.controller.js
 
-Contains the logic for handling event-related operations such as fetching, creating, updating, and deleting events. It utilizes services and middleware for database interactions and error handling.
+Contains logic for handling api endpoints. Utilizes services, utilities for database interactions and error handling.
 
 ## Middleware
 
@@ -118,7 +130,7 @@ Contains the logic for handling event-related operations such as fetching, creat
 
 ## Services
 
-- **event.service.js**: Contains business logic for event operations and interacts with the database.
+- **event.service.js**: Contains logic for event related CRUD operations on the database.
 
 ## Utilities
 
@@ -126,5 +138,3 @@ Contains the logic for handling event-related operations such as fetching, creat
 - **ApiResponse.js**: Defines custom API success responses.
 - **asyncHandler.js**: Handles asynchronous operations and errors.
 - **cloudinary.js**: Handles image uploads to Cloudinary.
-
----
